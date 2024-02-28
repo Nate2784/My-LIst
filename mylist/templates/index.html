@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyList</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/191bbdacd8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include "header.html" %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Add a new task</h1>
+
+        <!-- Add New Task Form -->
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Task name" required>
+            </div>
+            <div class="form-group">
+                <textarea name="description" class="form-control" placeholder="Task description" rows="3" cols="40"></textarea>
+            </div>
+            <div class="form-group">
+                <select name="status" class="form-control">
+                    <option value="todo">To Do</option>
+                    <option value="doing">Doing</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>            
+            
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </form>
+         <!-- Display To-Do Items -->
+         <ul class="list-group mt-4">
+            <!-- {% for task in tasks %}
+            <li class="list-group-item ">
+                <div class="task-name">My task: {{ task.name }}</div>
+                <div class="task-description">To-Do: {{ task.description }}</div>
+                <div class="task-status">Status: {{ task.status }}</div>
+                <span class="float-right">
+                    <a href="{% url 'edit_task' id task.id %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'delete_task' id task.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </span>
+            </li>
+            
+                </li>
+            {% empty %}
+                <li class="list-group-item">No tasks yet.</li>
+            {% endfor %} -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th class="d-flex">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ task.name }}</td>
+                            <td style="max-width: 200px;">{{ task.description }}</td>
+                            <td>{{ task.status }}</td>
+                            <td>
+                                <a href="{% url 'edit_task' id task.id %}" class="btn btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                                <a href="{% url 'delete_task' id task.id %}" class="btn btn-sm "><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No tasks yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <p class="align-text-center">Total tasks: {{ tasks.count }}</p>
+            
+        </ul>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

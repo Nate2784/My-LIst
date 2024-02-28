@@ -1,18 +1,25 @@
+{%load static%}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Confirm Delete</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/delete_confirmation.css'%}">
 </head>
 <body>
     <div class="wrapper d-flex justify-content-center">
 
         <h1>Are you sure you want to delete this task?</h1>
-        <p>{{ task.name }}</p>
+        <p>Task: {{ task.name }}</p>
+        <p>status: {{ task.status }}</p>
         <form method="post">
             {% csrf_token %}
-            <input type="submit" value="Yes, delete">
+            <div class="d-flex justify-content-between">
+            <input class="m-2" type="submit" value="Yes, delete">
         </form>
-        <a href="{% url 'home' id %}">No, go back</a>
+        <a class="m-2" href="{% url 'home' id %}">No, go back</a>
+
+            </div>
 
     </div>
 </body>

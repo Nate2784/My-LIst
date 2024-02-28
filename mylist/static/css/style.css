@@ -1,0 +1,27 @@
+header{
+    font-family:Arial, Helvetica, sans-serif;
+    background-color:rgb(45, 70, 118);
+}
+h5,h3{
+    color:aliceblue;
+}
+
+.btn-primary {
+    background-color: #a2bad4;
+    border: none;
+    color: #000000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 200;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #9fc0e4;
+    color: rgb(0, 0, 0);
+}

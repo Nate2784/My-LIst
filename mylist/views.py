@@ -47,16 +47,25 @@ def home(request, id):
         obj.status = status
         obj.save()
     tasks = todo.objects.filter(userID=id)
-    user = userInfo.objects.filter(id=id)
+
+    done_tasks = tasks.filter(status='done').count()
+    tasks_doing = tasks.filter(status='doing').count()
+    tasks_todo = tasks.filter(status='todo').count()
+
+    user = userInfo.objects.filter(id=id).first()
     data={
         'id': id,
         'tasks': tasks,
-        'user':user
+        'done_tasks':done_tasks,
+        'tasks_doing':tasks_doing,
+        'tasks_todo':tasks_todo,
+        'info':user,
     }
     return render(request, 'index.html', data)
 
 def edit_task(request,id, eid):
     task = get_object_or_404(todo, id=eid)
+    
 
     if request.method == 'POST':
 
@@ -72,7 +81,8 @@ def edit_task(request,id, eid):
 
         return redirect('home',id)
     data={
-        'task': task
+        'id':id,
+        'task': task,
     }
     
     return render(request, 'edit.html',data)

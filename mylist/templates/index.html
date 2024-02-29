@@ -34,6 +34,8 @@
             <button type="submit" class="btn btn-success">Add Task</button>
         </form>
          <ul class="list-group mt-4">
+            <p class="text-center">|  Tasks done: {{ done_tasks }} |   Tasks doing: {{ tasks_doing }} |  Tasks To do: {{ tasks_todo }} | Total tasks: {{ tasks.count }} |</p>
+        </p>
             <table class="table">
                 <thead>
                     <tr>
@@ -64,8 +66,6 @@
                 </tbody>
             </table>
             
-            <p class="text-center">|  Tasks done: {{ done_tasks }} |   Tasks doing: {{ tasks_doing }} |  Tasks To do: {{ tasks_todo }} | Total tasks: {{ tasks.count }} |</p>
-        </p>
             
         </ul>
     </div>
